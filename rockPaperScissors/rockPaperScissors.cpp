@@ -21,8 +21,16 @@ const int QUIT = 4;
 
 //int main
 int main() {
+	// holds int value in range 1-3 from compChoice()
+	int compMove;
 
-	int compMove, userMove, gameOutcome;
+	// holds int value in range 1-4 from userChoice()
+	int userMove;
+
+	// holds int value in range 1-3 from winner()
+	int gameOutcome;
+
+	// holds bool True or False from playAgain(), if user wants to play again or not
 	bool newGame;
 
 	do
@@ -37,7 +45,7 @@ int main() {
 			std::cout << "Sorry to see you go so soon!" << std::endl << std::endl;
 		}
 		else {
-
+			
 			displayCompChoice(compMove);
 
 			gameOutcome = winner(compMove, userMove);
@@ -47,6 +55,7 @@ int main() {
 
 				gameOutcome = repeat();
 			}
+			// asks user if they want to play again
 			newGame = playAgain();
 		}	
 	} while (newGame);
@@ -65,6 +74,7 @@ int compChoice() {
 	unsigned seed = time(0);
 	srand(seed);
 
+	// program randomly selects an int value in range 1-3
 	int y = 1 + rand() % 3;
 	return y;
 }
@@ -91,6 +101,7 @@ int userChoice() {
 
 	std::cout << std::endl << std::endl;
 
+	// choice validation; user must make selection between int values 1-4
 	while (n < 1 || n > 4) {
 		std::cout << "Please enter a valid selection: " << std::endl;
 		std::cin >> n;
@@ -154,12 +165,14 @@ bool playAgain() {
 
 	std::cout << std::endl << std::endl;
 
+	// choice validation; user must enter choice in the form 'Y', 'y', 'N', or 'n'
 	while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
 		std::cout << "Please enter a valid selection: ";
 		std::cin >> choice;
 	}
 	std::cout << std::endl << std::endl;
 
+	// if user chooses to play again, return True
 	if (choice == 'Y' || choice == 'y') {
 		return true;
 	}
@@ -170,9 +183,11 @@ bool playAgain() {
 //repeat game in case of a tie
 int repeat() {
 
+	// local variables correspond entirely to variables declared at the beginning of main()
 	int compMove, userMove, gameOutcome;
 	bool newGame;
 
+	// separate games, for user clarity while playing
 	for (int i = 0; i < 81; i++) {
 		std::cout << '*';
 	}
